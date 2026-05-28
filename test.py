@@ -233,7 +233,7 @@ def show_class_summary(dataframe):
                     textfont=dict(color='#000000', size=14, family="Arial Black") # Noir pur + police grasse pour un contraste maximal
                 )
                 fig_pie2.update_layout(**dark_layout)
-                st.plotly_chart(fig_pie2, use_container_width=True, theme="plotly_dark")
+                st.plotly_chart(fig_pie2, use_container_width=True, theme=None)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
 
