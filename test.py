@@ -127,6 +127,21 @@ def show_class_summary(dataframe):
         row_data["Appréciation"] = apprec if pd.notna(apprec) else ""
         summary_data.append(row_data)
 
+    # --- Ajustement du dark_layout (Légendes et arrière-plan clairs et nets) ---
+    dark_layout = dict(
+                template="plotly_dark",
+                paper_bgcolor="#0e1117",  
+                plot_bgcolor="#0e1117",
+                font=dict(color="#ffffff", size=14), # Titres et légendes extérieurs restent en blanc
+                legend=dict(
+                    bgcolor="rgba(0,0,0,0)",    
+                    font=dict(color="#ffffff", size=12)
+                ),
+                hoverlabel=dict(
+                    bgcolor="rgba(0,0,0,0)", 
+                    font=dict(color="#ffffff", size=14)
+                )
+            )
     with tab1:
         # Ligne de moyenne (Présents uniquement)
         mean_row = {"Élève": "📊 MOYENNE (PRÉSENTS)", "Appréciation": f"Sur {len(totals_presents)} présent(s)"}
@@ -186,21 +201,7 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
-            # --- Ajustement du dark_layout (Légendes et arrière-plan clairs et nets) ---
-            dark_layout = dict(
-                template="plotly_dark",
-                paper_bgcolor="#0e1117",  
-                plot_bgcolor="#0e1117",
-                font=dict(color="#ffffff", size=14), # Titres et légendes extérieurs restent en blanc
-                legend=dict(
-                    bgcolor="rgba(0,0,0,0)",    
-                    font=dict(color="#ffffff", size=12)
-                ),
-                hoverlabel=dict(
-                    bgcolor="rgba(0,0,0,0)", 
-                    font=dict(color="#ffffff", size=14)
-                )
-            )
+
             
             with c3:
                 st.write("**Répartition [0;5[ - [5;10[ - [10;15[ - [15;20]**")
