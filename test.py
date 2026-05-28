@@ -186,12 +186,12 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
-            # --- Ajustement du dark_layout ---
+            # --- Ajustement du dark_layout (Légendes et comportement du texte) ---
             dark_layout = dict(
                 template="plotly_dark",
                 paper_bgcolor="#0e1117",  
                 plot_bgcolor="#0e1117",
-                font=dict(color="#ffffff", size=14), # Légendes et titres restent blancs
+                font=dict(color="#ffffff", size=14), 
                 legend=dict(
                     bgcolor="rgba(0,0,0,0)",    
                     font=dict(color="#ffffff", size=12)
@@ -200,7 +200,9 @@ def show_class_summary(dataframe):
                     bgcolor="#1f2937",
                     font_size=14,
                     font_color="#ffffff"
-                )
+                ),
+                # FORCE le moteur graphique à gérer le contraste intelligemment
+                uniformtext=dict(mode='hide', minsize=12) 
             )
             
             with c3:
@@ -210,11 +212,9 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 
-                # CORRECTION DE LA SYNTAXE ICI
                 fig_pie1.update_traces(
                     textinfo='percent+value',
-                    textposition='inside',
-                    textfont=dict(color='auto', size=14)  # Structure correcte pour Plotly
+                    textposition='inside'
                 )
                 fig_pie1.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie1, use_container_width=True, theme=None)
@@ -226,11 +226,9 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 
-                # CORRECTION DE LA SYNTAXE ICI
                 fig_pie2.update_traces(
                     textinfo='percent+value',
-                    textposition='inside',
-                    textfont=dict(color='auto', size=14)  # Structure correcte pour Plotly
+                    textposition='inside'
                 )
                 fig_pie2.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie2, use_container_width=True, theme=None)
