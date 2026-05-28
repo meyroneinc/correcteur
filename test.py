@@ -5,7 +5,7 @@ import numpy as np
 import plotly.express as px
 
 # Configuration de la page
-st.set_page_config(page_title="Correcteur NSI Pro", layout="wide")
+st.set_page_config(page_title="Correcteur", layout="wide")
 
 # --- 1. FONCTIONS DE NETTOYAGE ET FORMATAGE ---
 def clean_float(val):
