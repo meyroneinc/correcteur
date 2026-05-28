@@ -256,7 +256,7 @@ for idx_exo, start_row in enumerate(indices_exos):
     
     scores_recap[nom_exo] = (score_exo, bareme_exo)
     total_global += score_exo
-    total_global -= 3
+    
 
     with st.expander(f"📘 {nom_exo} : {round(score_exo, 2)} / {bareme_exo}", expanded=True):
         for i in range(start_row + 1, end_row):
@@ -315,7 +315,7 @@ def generate_full_pdf_tex(dataframe, students_to_print):
     return latex + "\\end{document}"
 
 # --- 7. SIDEBAR ---
-bareme_reel_total = sum([v[1] for v in scores_recap.values()])
+bareme_reel_total = sum([v[1] for v in scores_recap.values()])-3
 st.sidebar.header("📊 RÉCAPITULATIF")
 for e, v in scores_recap.items(): st.sidebar.write(f"**{e}** : {round(v[0],2)} / {v[1]}")
 st.sidebar.divider()
