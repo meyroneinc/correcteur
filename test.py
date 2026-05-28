@@ -163,6 +163,7 @@ def show_class_summary(dataframe):
         st.divider()
 
         # --- Ligne 2 : Diagrammes Camemberts (Répartition sur 20) ---
+        # --- Ligne 2 : Diagrammes Camemberts (Répartition sur 20) ---
         st.write("📊 **Répartition des notes ramenées sur 20**")
         
         if totals_presents and bareme_total_reel > 0:
@@ -171,7 +172,6 @@ def show_class_summary(dataframe):
             df_notes = pd.DataFrame({"Note": notes_sur_20})
             
             # Définition des tranches et labels pour le premier camembert [0,5[, [5,10[, [10,15[, [15,20]
-            # On utilise 20.01 pour inclure le 20 pile dans la dernière tranche fermée à droite
             bins_1 = [0, 5, 10, 15, 20.01]
             labels_1 = ["[0, 5[", "[5, 10[", "[10, 15[", "[15, 20]"]
             df_notes['Tranche_1'] = pd.cut(df_notes['Note'], bins=bins_1, labels=labels_1, right=False, include_lowest=True)
@@ -185,6 +185,14 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
+            # Style commun pour le mode nuit
+            dark_layout = dict(
+                template="plotly_dark",
+                paper_bgcolor="#0e1117",  # Fond identique à l'interface Streamlit Dark
+                plot_bgcolor="#0e1117",
+                font=dict(color="#ffffff") # Légendes et textes forcés en blanc
+            )
+            
             with c3:
                 st.write("**Répartition [0;5[ - [5;10[ - [10;15[ - [15;20]**")
                 fig_pie1 = px.pie(counts_1, values='count', names='Tranche_1', 
@@ -192,6 +200,7 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 fig_pie1.update_traces(textinfo='percent+value')
+                fig_pie1.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie1, use_container_width=True)
                 
             with c4:
@@ -201,6 +210,7 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 fig_pie2.update_traces(textinfo='percent+value')
+                fig_pie2.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie2, use_container_width=True)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
