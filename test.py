@@ -197,7 +197,7 @@ def show_class_summary(dataframe):
                     font=dict(color="#ffffff", size=12)
                 ),
                 hoverlabel=dict(
-                    bgcolor="#1f0207",
+                    bgcolor="#000000",
                     font_size=14,
                     font_color="#ffffff"
                 )
