@@ -256,6 +256,7 @@ for idx_exo, start_row in enumerate(indices_exos):
     
     scores_recap[nom_exo] = (score_exo, bareme_exo)
     total_global += score_exo
+    total_global -= 3
 
     with st.expander(f"📘 {nom_exo} : {round(score_exo, 2)} / {bareme_exo}", expanded=True):
         for i in range(start_row + 1, end_row):
