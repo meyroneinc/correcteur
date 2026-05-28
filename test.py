@@ -101,7 +101,7 @@ def show_class_summary(dataframe):
     names = dataframe.iloc[0, 4::2].tolist()
     
     # Barème total réel
-    bareme_total_reel = sum([clean_float(dataframe.iloc[idx, 3]) for idx in indices_exos])
+    bareme_total_reel = sum([clean_float(dataframe.iloc[idx, 3]) for idx in indices_exos])-3
     
     summary_data = []
     scores_presents = {dataframe.iloc[idx, 2]: [] for idx in indices_exos}
