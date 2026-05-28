@@ -4,6 +4,18 @@ import os
 import numpy as np
 import plotly.express as px
 
+# Style commun pour le mode nuit (Correction des légendes)
+dark_layout = dict(
+                template="plotly_dark",
+                paper_bgcolor="#0e1117",  # Fond identique à l'interface Streamlit Dark
+                plot_bgcolor="#0e1117",
+                font=dict(color="#ffffff"), # Textes généraux en blanc
+                legend=dict(
+                    bgcolor="rgba(0,0,0,0)",    # Fond de la légende 100% transparent
+                    font=dict(color="#ffffff")   # Texte de la légende forcé en blanc
+                )
+            )
+
 # Configuration de la page
 st.set_page_config(page_title="Correcteur", layout="wide")
 
