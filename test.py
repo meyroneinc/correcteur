@@ -164,8 +164,7 @@ def show_class_summary(dataframe):
 
         st.divider()
 
-        # --- Ligne 2 : Diagrammes Camemberts (Répartition sur 20) ---
-        # --- Ligne 2 : Diagrammes Camemberts (Répartition sur 20) ---
+      # --- Ligne 2 : Diagrammes Camemberts (Répartition sur 20) ---
         st.write("📊 **Répartition des notes ramenées sur 20**")
         
         if totals_presents and bareme_total_reel > 0:
@@ -173,13 +172,13 @@ def show_class_summary(dataframe):
             notes_sur_20 = [(score / bareme_total_reel) * 20 for score in totals_presents]
             df_notes = pd.DataFrame({"Note": notes_sur_20})
             
-            # Définition des tranches et labels pour le premier camembert [0,5[, [5,10[, [10,15[, [15,20]
+            # Définition des tranches et labels pour le premier camembert
             bins_1 = [0, 5, 10, 15, 20.01]
             labels_1 = ["[0, 5[", "[5, 10[", "[10, 15[", "[15, 20]"]
             df_notes['Tranche_1'] = pd.cut(df_notes['Note'], bins=bins_1, labels=labels_1, right=False, include_lowest=True)
             counts_1 = df_notes['Tranche_1'].value_counts().reset_index()
             
-            # Définition des tranches et labels pour le second camembert [0,8], ]8,12], ]12,20]
+            # Définition des tranches et labels pour le second camembert
             bins_2 = [-0.01, 8, 12, 20.01]
             labels_2 = ["[0, 8]", "]8, 12]", "]12, 20]"]
             df_notes['Tranche_2'] = pd.cut(df_notes['Note'], bins=bins_2, labels=labels_2, right=True)
@@ -187,20 +186,20 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
-            # Configuration centralisée pour le mode sombre complet
+            # Configuration ultra-stricte pour le mode sombre
             dark_layout = dict(
                 template="plotly_dark",
                 paper_bgcolor="#0e1117",  
                 plot_bgcolor="#0e1117",
-                font=dict(color="#ffffff"), 
+                font=dict(color="#ffffff", size=14), # Texte global plus grand et blanc
                 legend=dict(
                     bgcolor="rgba(0,0,0,0)",    
-                    font=dict(color="#ffffff")   
+                    font=dict(color="#ffffff", size=12)
                 ),
                 hoverlabel=dict(
-                    bgcolor="#1f2937",         # Fond de l'info-bulle en gris foncé
-                    font_size=13,
-                    font_color="#ffffff"       # Texte de l'info-bulle forcé en BLANC
+                    bgcolor="#1f2937",
+                    font_size=14,
+                    font_color="#ffffff"
                 )
             )
             
@@ -211,9 +210,11 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 
-                # Force le texte à l'intérieur des parts en BLANC
+                # NETTOYAGE RADICAL : Texte à l'extérieur + lignes de flèches blanches
                 fig_pie1.update_traces(
                     textinfo='percent+value',
+                    textposition='outside',
+                    textfont=dict(color='#ffffff'),
                     insidetextfont=dict(color='#ffffff')
                 )
                 fig_pie1.update_layout(**dark_layout)
@@ -226,16 +227,17 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 
-                # Force le texte à l'intérieur des parts en BLANC
+                # NETTOYAGE RADICAL : Texte à l'extérieur + lignes de flèches blanches
                 fig_pie2.update_traces(
                     textinfo='percent+value',
+                    textposition='outside',
+                    textfont=dict(color='#ffffff'),
                     insidetextfont=dict(color='#ffffff')
                 )
                 fig_pie2.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie2, use_container_width=True)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
-
 
 # --- 5. INTERFACE PRINCIPALE ---
 col_t, col_b = st.columns([4, 1])
