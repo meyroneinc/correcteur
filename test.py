@@ -203,19 +203,18 @@ def show_class_summary(dataframe):
                 )
             )
             
-            with c3:
+           with c3:
                 st.write("**Répartition [0;5[ - [5;10[ - [10;15[ - [15;20]**")
                 fig_pie1 = px.pie(counts_1, values='count', names='Tranche_1', 
                                   color='Tranche_1',
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 
-                # REPOSITIONNEMENT ET CONTRASTE AUTOMATIQUE
+                # CORRECTION DE LA SYNTAXE ICI
                 fig_pie1.update_traces(
                     textinfo='percent+value',
-                    textposition='inside',      # On remet à l'intérieur
-                    textfont_color="auto",      # <-- Plotly choisit Noir ou Blanc selon le fond de la part
-                    textfont_size=14
+                    textposition='inside',
+                    textfont=dict(color='auto', size=14)  # Structure correcte pour Plotly
                 )
                 fig_pie1.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie1, use_container_width=True, theme=None)
@@ -227,12 +226,11 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 
-                # REPOSITIONNEMENT ET CONTRASTE AUTOMATIQUE
+                # CORRECTION DE LA SYNTAXE ICI
                 fig_pie2.update_traces(
                     textinfo='percent+value',
-                    textposition='inside',      # On remet à l'intérieur
-                    textfont_color="auto",      # <-- Plotly choisit Noir ou Blanc selon le fond de la part
-                    textfont_size=14
+                    textposition='inside',
+                    textfont=dict(color='auto', size=14)  # Structure correcte pour Plotly
                 )
                 fig_pie2.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie2, use_container_width=True, theme=None)
