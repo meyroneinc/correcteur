@@ -209,7 +209,6 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 
-                # NETTOYAGE RADICAL : Texte à l'extérieur + lignes de flèches blanches
                 fig_pie1.update_traces(
                     textinfo='percent+value',
                     textposition='outside',
@@ -217,7 +216,9 @@ def show_class_summary(dataframe):
                     insidetextfont=dict(color='#ffffff')
                 )
                 fig_pie1.update_layout(**dark_layout)
-                st.plotly_chart(fig_pie1, use_container_width=True)
+                
+                # --- LE CHANGEMENT EST ICI : theme=None ---
+                st.plotly_chart(fig_pie1, use_container_width=True, theme=None)
                 
             with c4:
                 st.write("**Découpage Profil (Fragile / Moyen / Solide)**")
@@ -226,7 +227,6 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 
-                # NETTOYAGE RADICAL : Texte à l'extérieur + lignes de flèches blanches
                 fig_pie2.update_traces(
                     textinfo='percent+value',
                     textposition='outside',
@@ -234,7 +234,9 @@ def show_class_summary(dataframe):
                     insidetextfont=dict(color='#ffffff')
                 )
                 fig_pie2.update_layout(**dark_layout)
-                st.plotly_chart(fig_pie2, use_container_width=True)
+                
+                # --- LE CHANGEMENT EST ICI AUSSI : theme=None ---
+                st.plotly_chart(fig_pie2, use_container_width=True, theme=None)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
 
