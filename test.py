@@ -203,7 +203,7 @@ def show_class_summary(dataframe):
                 )
             )
             
-           with c3:
+            with c3:
                 st.write("**Répartition [0;5[ - [5;10[ - [10;15[ - [15;20]**")
                 fig_pie1 = px.pie(counts_1, values='count', names='Tranche_1', 
                                   color='Tranche_1',
