@@ -187,16 +187,20 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
-            # Style commun pour le mode nuit
-            # Style commun pour le mode nuit (Correction des légendes)
+            # Configuration centralisée pour le mode sombre complet
             dark_layout = dict(
                 template="plotly_dark",
-                paper_bgcolor="#0e1117",  # Fond identique à l'interface Streamlit Dark
+                paper_bgcolor="#0e1117",  
                 plot_bgcolor="#0e1117",
-                font=dict(color="#ffffff"), # Textes généraux en blanc
+                font=dict(color="#ffffff"), 
                 legend=dict(
-                    bgcolor="rgba(0,0,0,0)",    # Fond de la légende 100% transparent
-                    font=dict(color="#ffffff")   # Texte de la légende forcé en blanc
+                    bgcolor="rgba(0,0,0,0)",    
+                    font=dict(color="#ffffff")   
+                ),
+                hoverlabel=dict(
+                    bgcolor="#1f2937",         # Fond de l'info-bulle en gris foncé
+                    font_size=13,
+                    font_color="#ffffff"       # Texte de l'info-bulle forcé en BLANC
                 )
             )
             
@@ -206,7 +210,12 @@ def show_class_summary(dataframe):
                                   color='Tranche_1',
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
-                fig_pie1.update_traces(textinfo='percent+value')
+                
+                # Force le texte à l'intérieur des parts en BLANC
+                fig_pie1.update_traces(
+                    textinfo='percent+value',
+                    insidetextfont=dict(color='#ffffff')
+                )
                 fig_pie1.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie1, use_container_width=True)
                 
@@ -216,11 +225,17 @@ def show_class_summary(dataframe):
                                   color='Tranche_2',
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
-                fig_pie2.update_traces(textinfo='percent+value')
+                
+                # Force le texte à l'intérieur des parts en BLANC
+                fig_pie2.update_traces(
+                    textinfo='percent+value',
+                    insidetextfont=dict(color='#ffffff')
+                )
                 fig_pie2.update_layout(**dark_layout)
                 st.plotly_chart(fig_pie2, use_container_width=True)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
+
 
 # --- 5. INTERFACE PRINCIPALE ---
 col_t, col_b = st.columns([4, 1])
