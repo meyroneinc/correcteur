@@ -186,19 +186,20 @@ def show_class_summary(dataframe):
             
             c3, c4 = st.columns(2)
             
-            # Configuration ultra-stricte pour le mode sombre
+            # --- Ajustement du dark_layout ---
             dark_layout = dict(
                 template="plotly_dark",
                 paper_bgcolor="#0e1117",  
                 plot_bgcolor="#0e1117",
-                font=dict(color="#ffffff", size=14), # Texte global plus grand et blanc
+                font=dict(color="#ffffff", size=14), # Légendes et titres restent blancs
                 legend=dict(
                     bgcolor="rgba(0,0,0,0)",    
                     font=dict(color="#ffffff", size=12)
                 ),
                 hoverlabel=dict(
+                    bgcolor="#1f2937",
                     font_size=14,
-                    font_color="#000000"
+                    font_color="#ffffff"
                 )
             )
             
@@ -209,15 +210,14 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 5[":"#ef553b", "[5, 10[":"#ef963b", "[10, 15[":"#636efa", "[15, 20]":"#00cc96"},
                                   category_orders={"Tranche_1": labels_1})
                 
+                # REPOSITIONNEMENT ET CONTRASTE AUTOMATIQUE
                 fig_pie1.update_traces(
                     textinfo='percent+value',
-                    textposition='outside',
-                    textfont=dict(color='#ffffff'),
-                    insidetextfont=dict(color='#ffffff')
+                    textposition='inside',      # On remet à l'intérieur
+                    textfont_color="auto",      # <-- Plotly choisit Noir ou Blanc selon le fond de la part
+                    textfont_size=14
                 )
                 fig_pie1.update_layout(**dark_layout)
-                
-                # --- LE CHANGEMENT EST ICI : theme=None ---
                 st.plotly_chart(fig_pie1, use_container_width=True, theme=None)
                 
             with c4:
@@ -227,15 +227,14 @@ def show_class_summary(dataframe):
                                   color_discrete_map={"[0, 8]":"#dc3545", "]8, 12]":"#ffc107", "]12, 20]":"#28a745"},
                                   category_orders={"Tranche_2": labels_2})
                 
+                # REPOSITIONNEMENT ET CONTRASTE AUTOMATIQUE
                 fig_pie2.update_traces(
                     textinfo='percent+value',
-                    textposition='outside',
-                    textfont=dict(color='#ffffff'),
-                    insidetextfont=dict(color='#ffffff')
+                    textposition='inside',      # On remet à l'intérieur
+                    textfont_color="auto",      # <-- Plotly choisit Noir ou Blanc selon le fond de la part
+                    textfont_size=14
                 )
                 fig_pie2.update_layout(**dark_layout)
-                
-                # --- LE CHANGEMENT EST ICI AUSSI : theme=None ---
                 st.plotly_chart(fig_pie2, use_container_width=True, theme=None)
         else:
             st.info("Aucune note disponible pour générer les camemberts.")
